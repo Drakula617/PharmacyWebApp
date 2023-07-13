@@ -5,7 +5,7 @@ using PharmacyWebApp.Models;
 using PharmacyWebApp.Models.HelperClasses;
 using PharmacyWebApp.Models.Tables;
 
-namespace PharmacyWebApp.Controllers
+namespace PharmacyWebApp.Controllers.api
 {
     [ApiController]
     [Route("api/[controller]")]

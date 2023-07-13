@@ -4,7 +4,7 @@ using PharmacyWebApp.Models;
 using PharmacyWebApp.Models.HelperClasses;
 using PharmacyWebApp.Models.Tables;
 
-namespace PharmacyWebApp.Controllers.ViewCotrollers
+namespace PharmacyWebApp.Controllers.view
 {
     [NonController]
     [Route("view/[controller]")]

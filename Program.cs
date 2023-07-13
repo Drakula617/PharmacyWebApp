@@ -35,35 +35,27 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "PharmacyWebApp"); });
 }
 app.UseHttpsRedirection();
+app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=/api/Pharmacy}/{action=PharmacyPage}/{id?}"
-//    //pattern:"api/Pharmacy/PharmacyPage",
-//    //defaults: new { controller = "Pharmacy", action = "PharmacyPage" }
-//    );
-//app.MapControllerRoute(
-//    name:"api",
-//    pattern:"api/{controller}/{action}/{id?}",
-//    defaults: "api/Pharmacy/PharmacyPage"
-//    );
-//app.UseMvc(route=> {
-//    route.MapRoute(name: "default", template: "{controller=Pharmacy}/{action=PharmacyPage}/{id?}");
-//});
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action}/{id?}",
+    defaults: new { controller = "view/Pharmacy", action = "PharmacyPage" });
+    endpoints.MapControllerRoute(
+        name: "view",
+        pattern: "view/{controller}/{action}/{id?}");
+
     endpoints.MapControllerRoute(
         name: "api",
         pattern: "api/{controller}/{action}/{id?}"
         );
-    endpoints.MapControllerRoute(
-        name: "view",
-        pattern: "view/{controller}/{action}/{id?}",
-        defaults: new { controller = "View/Pharmacy", action = "PharmacyPage" });
+
 });
 app.Run();

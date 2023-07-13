@@ -5,7 +5,8 @@ using PharmacyWebApp.Models;
 using PharmacyWebApp.Models.HelperClasses;
 using PharmacyWebApp.Models.Tables;
 
-namespace PharmacyWebApp.Controllers.ViewCotrollers
+
+namespace PharmacyWebApp.Controllers.view
 {
     [NonController]
     [Route("view/[controller]")]
@@ -16,12 +17,11 @@ namespace PharmacyWebApp.Controllers.ViewCotrollers
         {
             _pharmacyDB = pharmacyDB;
         }
-        [HttpGet("PharmacyPage")]
+        [HttpGet("/PharmacyPage")]
         public IActionResult PharmacyPage()
         {
             return View("PharmacyPage", _pharmacyDB.Pharmacies.ToList());
         }
-
 
         [HttpGet("/ProductsForPharmacyPage/{id}")]
         public IActionResult ProductsForPharmacyPage([FromRoute] string id)

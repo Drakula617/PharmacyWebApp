@@ -137,3 +137,6 @@ C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\
 C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\obj\Debug\net7.0\PharmacyWebApp.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\System.Net.Http.Formatting.dll
+C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\System.Web.Http.dll
+C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
