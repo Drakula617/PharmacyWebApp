@@ -9,6 +9,7 @@ namespace PharmacyWebApp.Models.Tables
     [Table("Pharmacy")]
     public class Pharmacy
     {
+
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }

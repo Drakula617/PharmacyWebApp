@@ -9,7 +9,7 @@
 <body>
     <div id="div-parties">
         <form onsubmit="return false;" v-on:submit="addParty">
-            <a class="link-back" href="/Warehouse/WarehousePage/?id=@Model.Pharmacy.Id">Назад</a>
+            <a class="link-back" href="view/Warehouse/WarehousePage/@Model.Pharmacy.Id">Назад</a>
             <input class="input-field" type="text" v-model="newparty.CountProducts" required />
             <div class="select-box">
                 <select v-model="newparty.Product">
@@ -72,21 +72,21 @@
                 },
                 getProducts: function()
                 {
-                    axios.post('/Product/GetProducts').then((response)=>
+                    axios.post('api/Product/GetProducts').then((response)=>
                     {
                         this.products = response.data;
                     });
                 },
                 removeParty: function(id)
                 {
-                    axios.post('/Party/RemoveParty/?id='+ id ).
+                    axios.post('api/Party/RemoveParty/'+ id ).
                     then((response)=> {
                         this.parties = this.parties.filter(party=> party.id != id);
                     });
                 },
                 addParty: function()
                 {
-                    axios.post('/Party/AddParty', this.newparty)
+                    axios.post('api/Party/AddParty', this.newparty)
                     .then((response)=> {
                         this.parties.push(response.data);
                     });

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gidin\\source\\repos\\PharmacyWebApp\\PharmacyWebApp.csproj": {}
+    "C:\\Users\\gidin\\OneDrive\\Рабочий стол\\PharmacyWebApp\\PharmacyWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gidin\\source\\repos\\PharmacyWebApp\\PharmacyWebApp.csproj": {
+    "C:\\Users\\gidin\\OneDrive\\Рабочий стол\\PharmacyWebApp\\PharmacyWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gidin\\source\\repos\\PharmacyWebApp\\PharmacyWebApp.csproj",
+        "projectUniqueName": "C:\\Users\\gidin\\OneDrive\\Рабочий стол\\PharmacyWebApp\\PharmacyWebApp.csproj",
         "projectName": "PharmacyWebApp",
-        "projectPath": "C:\\Users\\gidin\\source\\repos\\PharmacyWebApp\\PharmacyWebApp.csproj",
+        "projectPath": "C:\\Users\\gidin\\OneDrive\\Рабочий стол\\PharmacyWebApp\\PharmacyWebApp.csproj",
         "packagesPath": "C:\\Users\\gidin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gidin\\source\\repos\\PharmacyWebApp\\obj\\",
+        "outputPath": "C:\\Users\\gidin\\OneDrive\\Рабочий стол\\PharmacyWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -27,6 +27,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -57,9 +58,21 @@
               "target": "Package",
               "version": "[7.0.8, )"
             },
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[1.6.5, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -81,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
