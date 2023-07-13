@@ -1,33 +1,33 @@
-﻿using PharmacyWebApp.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PharmacyWebApp.Interfaces;
 using PharmacyWebApp.Models.Tables;
 using System.Diagnostics;
 
 namespace PharmacyWebApp.Models.HelperClasses
 {
-    public class PharmacyHelper: IPharmacyHelper
+    public class PharmacyHelper : IPharmacyHelper
     {
         readonly PharmacyDB _pharmacyDB;
-        readonly Pharmacy _pharmacy;
-        public PharmacyHelper(PharmacyDB pharmacyDB, Pharmacy pharmacy)
+        readonly IWarehouseHelper _warehouseHelper;
+        public PharmacyHelper(PharmacyDB pharmacyDB, IWarehouseHelper warehouseHelper)
         {
             _pharmacyDB = pharmacyDB;
-            _pharmacy = pharmacy;
+            _warehouseHelper = warehouseHelper;
         }
-        void IPharmacyHelper.Add(out Pharmacy newpharmacy)
+        public void Add(Pharmacy obj)
         {
-            newpharmacy = _pharmacyDB.Pharmacies.Add(_pharmacy).Entity;
+            _pharmacyDB.Pharmacies.Add(obj);
             _pharmacyDB.SaveChanges();
         }
-
-        void IPharmacyHelper.Remove()
+        public IEnumerable<Pharmacy> GetAll(int id)
         {
-            foreach (Warehouse warehouse in _pharmacy.Warehouses)
-            {
-                IWarehouseHelper warehouseHelper = new WarehouseHelper(_pharmacyDB, warehouse);
-                warehouseHelper.Remove();
-            }
-            _pharmacyDB.Pharmacies.Remove(_pharmacy);
-            _pharmacyDB.SaveChanges();
+            return _pharmacyDB.Pharmacies.ToList();
+        }
+        public void Remove(int id)
+        {
+            _warehouseHelper.RemoveByIdPharmacy(id);
+            _pharmacyDB.Database.ExecuteSqlRaw($"Delete from Pharmacy where Id = {id}");
+            
         }
     }
 }

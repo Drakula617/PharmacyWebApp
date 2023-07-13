@@ -1,32 +1,41 @@
-﻿using PharmacyWebApp.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PharmacyWebApp.Interfaces;
 using PharmacyWebApp.Models.Tables;
 using System.IO;
 
 namespace PharmacyWebApp.Models.HelperClasses
 {
     public class PartyHelper : Party, IPartyHelper
-    {
+    { 
         readonly PharmacyDB _pharmacyDB;
-        readonly Party _party;
-        public PartyHelper(PharmacyDB pharmacyDB, Party party) 
+        public PartyHelper(PharmacyDB pharmacyDB) 
         {
             _pharmacyDB = pharmacyDB;
-            _party = party;
         }
-
-        void IPartyHelper.Add(out Party newParty)
+        public void Add(Party obj)
         {
-            newParty = _party;
-            newParty.Warehouse = _pharmacyDB.Warehouses.Find(_party.Warehouse.Id);
-            newParty.Product = _pharmacyDB.Products.Find(_party.Product.Id);
-            _pharmacyDB.Parties.Add(newParty);
+            _pharmacyDB.Parties.Add(obj);
             _pharmacyDB.SaveChanges();
         }
 
-        void IPartyHelper.Remove()
+        public IEnumerable<Party> GetAll(int id)
         {
-           _pharmacyDB.Parties.Remove(_party);
-           _pharmacyDB.SaveChanges();
+            return _pharmacyDB.Parties.Where(p => p.Warehouse.Id == id).ToList();
+        }
+
+        public void Remove(int id)
+        {
+            _pharmacyDB.Database.ExecuteSqlRaw($"Delete from Party where id = {id}");
+        }
+
+        public void RemoveByIdProduct(int id)
+        {
+            _pharmacyDB.Database.ExecuteSqlRaw($"Delete from Party where ProductId = {id}");
+        }
+
+        public void RemoveByIdWarehouse(int id)
+        {
+            _pharmacyDB.Database.ExecuteSqlRaw($"Delete from Party where WarehouseId = {id}");
         }
     }
 }

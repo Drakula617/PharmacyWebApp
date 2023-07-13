@@ -2,9 +2,8 @@
 
 namespace PharmacyWebApp.Interfaces
 {
-    public interface IProductHelper
+    public interface IProductHelper:IHelper<Product>
     {
-        public void Remove();
-        public void Add(out Product newProduct);
+        
     }
 }

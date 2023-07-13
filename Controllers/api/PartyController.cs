@@ -19,9 +19,9 @@ namespace PharmacyWebApp.Controllers.api
         [HttpPost("/AddParty")]
         public IActionResult AddParty([FromBody] Party party)
         {
-            IPartyHelper partyHelper = new PartyHelper(_pharmacyDB, party);
-            partyHelper.Add(out party);
-            return new JsonResult(party);
+            IPartyHelper partyHelper = new PartyHelper(_pharmacyDB);
+            partyHelper.Add(party);
+            return new JsonResult();
         }
         [HttpPost("/RemoveParty/{id}")]
         public IActionResult RemoveParty([FromRoute] string id)

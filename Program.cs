@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Microsoft.OpenApi.Models;
 using PharmacyWebApp.Models;
+using PharmacyWebApp.Interfaces;
+using PharmacyWebApp.Models.HelperClasses;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,11 @@ builder.Services.AddDbContext<PharmacyDB>(option =>
     option.UseSqlite(builder.Configuration.GetConnectionString("PharmacyDBConncetion"))
     .UseLazyLoadingProxies());
 builder.Services.AddScoped<PharmacyDB>();
+builder.Services.AddTransient<IPartyHelper, PartyHelper>();
+builder.Services.AddTransient<IPharmacyHelper, PharmacyHelper>();
+builder.Services.AddTransient<IProductHelper, ProductHelper>();
+builder.Services.AddTransient<IWarehouseHelper, WarehouseHelper>();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo()
@@ -45,12 +52,10 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action}/{id?}",
-    defaults: new { controller = "view/Pharmacy", action = "PharmacyPage" });
-    endpoints.MapControllerRoute(
         name: "view",
-        pattern: "view/{controller}/{action}/{id?}");
+        pattern: "view/{controller}/{action}/{id?}",
+        defaults: new { controller = "Pharmacy", action = "PharmacyPage" }
+        );
 
     endpoints.MapControllerRoute(
         name: "api",

@@ -2,9 +2,13 @@
 
 namespace PharmacyWebApp.Interfaces
 {
-    public interface IWarehouseHelper
+    public interface IWarehouseHelper: IHelper<Warehouse>
     {
-        public void Add(out Warehouse newWarehouse);
-        public void Remove();
+
+        /// <summary>
+        /// Удаление складов по Id аптеки
+        /// </summary>
+        /// <param name="id"></param>
+        void RemoveByIdPharmacy(int id);
     }
 }

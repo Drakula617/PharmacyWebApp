@@ -7,12 +7,10 @@ using PharmacyWebApp.Models.Tables.ProductClasses;
 namespace PharmacyWebApp.Models.Tables
 {
     [Table("Pharmacy")]
-    public class Pharmacy
+    public class Pharmacy: BaseModel
     {
 
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
+
         public string City { get; set; }
         public string Street { get; set; }
         public string Phone { get; set; }

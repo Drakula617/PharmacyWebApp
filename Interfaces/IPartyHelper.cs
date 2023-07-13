@@ -2,9 +2,9 @@
 
 namespace PharmacyWebApp.Interfaces
 {
-    public interface IPartyHelper
+    public interface IPartyHelper: IHelper<Party>
     {
-        public void Remove();
-        public void Add(out Party newParty);
+        void RemoveByIdProduct(int id);
+        void RemoveByIdWarehouse(int id);
     }
 }

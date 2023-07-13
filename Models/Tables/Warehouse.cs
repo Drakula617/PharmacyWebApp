@@ -6,11 +6,9 @@ using System.Text.Json.Serialization;
 namespace PharmacyWebApp.Models.Tables
 {
     [Table("Warehouse")]
-    public class Warehouse
+    public class Warehouse:BaseModel
     {
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
+
         public virtual Pharmacy Pharmacy { get; set; }
         [JsonIgnore]
         public virtual ICollection<Party> Parties { get; set; }

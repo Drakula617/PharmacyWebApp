@@ -30,6 +30,7 @@ namespace PharmacyWebApp.Controllers.api
             {
                 return NotFound("Аптека не найдена и не может быть удалена");
             }
+            
             IPharmacyHelper pharmacyHelper = new PharmacyHelper(_pharmacyDB, _pharmacyDB.Pharmacies.Find(idPharmacy));
             pharmacyHelper.Remove();
             return Ok();
