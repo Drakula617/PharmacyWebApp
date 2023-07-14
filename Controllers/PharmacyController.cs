@@ -7,7 +7,7 @@ using PharmacyWebApp.Models.Tables;
 
 namespace PharmacyWebApp.Controllers
 {
-
+    //[ApiController]
     //[Route("[controller]")]
     public class PharmacyController : Controller
     {

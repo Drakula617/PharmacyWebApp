@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "7KHjq6Ug1cLy9QDIWvcK+4sJaAy/3fqEioHRywQTgHKfKSvUOVKjCGqGAZjNZ2RT0qGFsivqZv2IVJP/42Valw==",
+  "dgSpecHash": "CvpylyKSv0Yt482ndEw5khgHF8LjSexzm21QQu+K+C5NcHN+DPCsJ/PGjaicDn3BubJODYocFLFWnTgXhK92BQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\gidin\\OneDrive\\Рабочий стол\\PharmacyWebApp\\PharmacyWebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gidin\\.nuget\\packages\\castle.core\\5.1.0\\castle.core.5.1.0.nupkg.sha512",
     "C:\\Users\\gidin\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.9\\microsoft.aspnet.webapi.client.5.2.9.nupkg.sha512",
     "C:\\Users\\gidin\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.9\\microsoft.aspnet.webapi.core.5.2.9.nupkg.sha512",
+    "C:\\Users\\gidin\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.1.0\\microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512",
     "C:\\Users\\gidin\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.8\\microsoft.data.sqlite.core.7.0.8.nupkg.sha512",
     "C:\\Users\\gidin\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.8\\microsoft.entityframeworkcore.7.0.8.nupkg.sha512",
     "C:\\Users\\gidin\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.8\\microsoft.entityframeworkcore.abstractions.7.0.8.nupkg.sha512",

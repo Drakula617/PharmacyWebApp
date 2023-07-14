@@ -140,3 +140,4 @@ C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\obj\Debug\net7.0\
 C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\System.Net.Http.Formatting.dll
 C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\System.Web.Http.dll
 C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\gidin\OneDrive\Рабочий стол\PharmacyWebApp\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.dll

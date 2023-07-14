@@ -6,7 +6,8 @@ using PharmacyWebApp.Models.Tables;
 
 namespace PharmacyWebApp.Controllers
 {
-    //[NonController]
+
+    //[ApiController]
     //[Route("[controller]")]
     public class WarehouseController : Controller
     {
@@ -31,7 +32,7 @@ namespace PharmacyWebApp.Controllers
             }
             return View("WarehousePage", pharmacy);
         }
-        [HttpPost("Warehouse/RemoveWarehouse/{id}")]
+        [Route("Warehouse/RemoveWarehouse/{id}")]
         public IActionResult RemoveWarehouse([FromRoute] string id, [FromServices] IWarehouseHelper warehouseHelper)
         {
             int idWarehouse;

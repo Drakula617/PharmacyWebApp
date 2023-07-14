@@ -6,7 +6,7 @@ using PharmacyWebApp.Models.Tables;
 
 namespace PharmacyWebApp.Controllers
 {
-    //[NonController]
+    //[ApiController]
     //[Route("[controller]")]
     public class PartyController : Controller
     {
