@@ -8,6 +8,8 @@ namespace PharmacyWebApp.Controllers
 {
     //[NonController]
     //[Route("[controller]")]
+    [ApiController]
+    [Route("Warehouse")]
     public class WarehouseController : Controller
     {
         readonly PharmacyDB _pharmacyDB;
@@ -16,7 +18,8 @@ namespace PharmacyWebApp.Controllers
             _pharmacyDB = pharmacyDB;
         }
         //[HttpPost("/WarehousePage/{id}")]
-        [Route("Warehouse/WarehousePage/{id}")]
+        //[Route("Warehouse/WarehousePage/{id}")]
+        [HttpGet("WarehousePage/{id}")]
         public IActionResult WarehousePage([FromRoute] string id)
         {
             int idPharmacy;
@@ -31,7 +34,7 @@ namespace PharmacyWebApp.Controllers
             }
             return View("WarehousePage", pharmacy);
         }
-        [HttpPost("Warehouse/RemoveWarehouse/{id}")]
+        [HttpPost("RemoveWarehouse/{id}")]
         public IActionResult RemoveWarehouse([FromRoute] string id, [FromServices] IWarehouseHelper warehouseHelper)
         {
             int idWarehouse;
@@ -42,7 +45,7 @@ namespace PharmacyWebApp.Controllers
             warehouseHelper.Remove(idWarehouse);
             return Ok();
         }
-        [HttpPost("Warehouse/AddWarehouse")]
+        [HttpPost("AddWarehouse")]
         public IActionResult AddWarehouse([FromBody] Warehouse warehouse, [FromServices] IWarehouseHelper warehouseHelper)
         {
             Warehouse newwarehouse = warehouseHelper.Add(warehouse);

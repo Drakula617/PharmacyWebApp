@@ -9,6 +9,8 @@ namespace PharmacyWebApp.Controllers
 {
 
     //[Route("[controller]")]
+    [ApiController]
+    [Route("Pharmacy")]
     public class PharmacyController : Controller
     {
         readonly PharmacyDB _pharmacyDB;
@@ -16,8 +18,9 @@ namespace PharmacyWebApp.Controllers
         {
             _pharmacyDB = pharmacyDB;
         }
-        [Route("")]
-        [Route("Pharmacy/PharmacyPage")]
+        //[Route("")]
+        //[Route("/PharmacyPage")]
+        [HttpGet("PharmacyPage")]
         public IActionResult PharmacyPage([FromServices] IPharmacyHelper pharmacyHelper)
         {
             return View("PharmacyPage", pharmacyHelper.GetAll(0));
@@ -38,7 +41,7 @@ namespace PharmacyWebApp.Controllers
         //    }
         //    return View("ProductsForPharmacyPage", _pharmacyDB.Pharmacies.Find(idPharmacy));
         //}
-        [HttpPost("Pharmacy/RemovePharmacy/{id}")]
+        [HttpPost("RemovePharmacy/{id}")]
         public IActionResult RemovePharmacy([FromRoute] string id, [FromServices] IPharmacyHelper pharmacyHelper)
         {
             int idPharmacy;
@@ -50,7 +53,7 @@ namespace PharmacyWebApp.Controllers
             pharmacyHelper.Remove(idPharmacy);
             return Ok();
         }
-        [HttpPost("Pharmacy/AddPharmacy")]
+        [HttpPost("AddPharmacy")]
         public IActionResult AddPharmacy([FromBody] Pharmacy pharmacy, [FromServices] IPharmacyHelper pharmacyHelper)
         {
             Pharmacy newpharmacy = pharmacyHelper.Add(pharmacy);

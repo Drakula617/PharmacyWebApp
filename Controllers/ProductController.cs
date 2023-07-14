@@ -8,6 +8,8 @@ namespace PharmacyWebApp.Controllers
 {
     //[NonController]
     //[Route("[controller]")]
+    [ApiController]
+    [Route("Product")]
     public class ProductController : Controller
     {
         readonly PharmacyDB _pharmacyDB;
@@ -15,23 +17,24 @@ namespace PharmacyWebApp.Controllers
         {
             _pharmacyDB = pharmacyDB;
         }
-        [Route("Product/ProductPage")]
+        //[Route("Product/ProductPage")]
+        [HttpPost("ProductPage")]
         public IActionResult ProductPage([FromServices] IProductHelper productHelper)
         {
             return View("ProductPage", productHelper.GetAll(0));
         }
-        [HttpPost("Product/GetProducts")]
+        [HttpPost("GetProducts")]
         public IActionResult GetProducts([FromServices] IProductHelper productHelper)
         {
             return Json(productHelper.GetAll(0));
         }
-        [HttpPost("Product/AddProduct")]
+        [HttpPost("AddProduct")]
         public IActionResult AddProduct([FromBody] Product product, [FromServices] IProductHelper productHelper)
         {
             Product newproduct = productHelper.Add(product);
             return Json(newproduct);
         }
-        [HttpPost("Product/RemoveProduct/{id}")]
+        [HttpPost("RemoveProduct/{id}")]
         public IActionResult RemoveProduct([FromRoute] string id, [FromServices] IProductHelper productHelper)
         {
             int idProduct;

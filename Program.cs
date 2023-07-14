@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Microsoft.OpenApi.Models;
+using PharmacyWebApp.Controllers;
 using PharmacyWebApp.Models;
 using PharmacyWebApp.Interfaces;
 using PharmacyWebApp.Models.HelperClasses;
+using RedirectResult = System.Web.Http.Results.RedirectResult;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +30,11 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1"
     });
 });
+
+//builder.WebHost.UseUrls($"https://localhost:7166/swagger");
+
 var app = builder.Build();
+//app.UsePathBase($"/swagger");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -50,7 +57,29 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Pharmacy}/{action=PharmacyPage}/{id?}");
+
+/*app.UseMvc(routes =>
+{
+    routes.MapRoute(
+        name: "default",
+        template: "{controller=Pharmacy}/{action=PharmacyPage}/{id?}");
+});*/
+
+app.UseEndpoints(e =>
+{
+    e.MapGet("/", async context =>
+    {
+        await Task.Factory.StartNew(()=> context.Response.Redirect("Pharmacy/PharmacyPage"));
+    });
+
+    //e.MapControllerRoute(
+    //    name: "/",
+    //    pattern: "{controller=Pharmacy}/{action=PharmacyPage}/{id?}");
+});
+
+
+/*app.MapControllerRoute(
+    name: "",
+    pattern: "{controller=Pharmacy}/{action=PharmacyPage}/{id?}");*/
+
 app.Run();

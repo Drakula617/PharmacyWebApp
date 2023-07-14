@@ -6,8 +6,9 @@ using PharmacyWebApp.Models.Tables;
 
 namespace PharmacyWebApp.Controllers
 {
-    //[NonController]
-    //[Route("[controller]")]
+    ///[NonController]
+    [ApiController]
+    [Route("Party")]
     public class PartyController : Controller
     {
         readonly PharmacyDB _pharmacyDB;
@@ -15,7 +16,8 @@ namespace PharmacyWebApp.Controllers
         {
             _pharmacyDB = pharmacyDB;
         }
-        [Route("Party/PartyPage/{id}")]
+        //[Route("Party/PartyPage/{id}")]
+        [HttpGet("PartyPage/{id}")]
         public IActionResult PartyPage([FromRoute] string id)
         {
             int idWarehouse;
@@ -31,14 +33,14 @@ namespace PharmacyWebApp.Controllers
             }
             return View("PartyPage", warehouse);
         }
-        [HttpPost("Party/AddParty")]
+        [HttpPost("AddParty")]
         public IActionResult AddParty([FromBody] Party party, [FromServices] IPartyHelper partyHelper)
         {
             Party newparty = partyHelper.Add(party);
             return Json(newparty);
         }
 
-        [HttpPost("Party/RemoveParty/{id}")]
+        [HttpPost("RemoveParty/{id}")]
         public IActionResult RemoveParty([FromRoute] string id, [FromServices] IPartyHelper partyHelper)
         {
             int idParty;
