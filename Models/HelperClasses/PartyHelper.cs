@@ -15,7 +15,9 @@ namespace PharmacyWebApp.Models.HelperClasses
         public Party Add(Party obj)
         {
             obj.Warehouse = _pharmacyDB.Warehouses.Find(obj.Warehouse.Id);
+            obj.Product = _pharmacyDB.Products.Find(obj.Product.Id);
             Party newparty = _pharmacyDB.Parties.Add(obj).Entity;
+            
             _pharmacyDB.SaveChanges();
             return newparty;
         }

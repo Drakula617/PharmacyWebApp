@@ -49,13 +49,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Pharmacy}/{action=PharmacyPage}/{id?}");
-//app.UseEndpoints(endpoints =>
-//{
-//    app.MapControllerRoute(
+app.MapControllers();
+//app.MapControllerRoute(
 //    name: "default",
-//    pattern: "def/{controller=Pharmacy}/{action=PharmacyPage}/{id?}");
-//});
+//    pattern: "{controller=Pharmacy}/{action=PharmacyPage}/{id?}");
 app.Run();

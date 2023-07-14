@@ -15,32 +15,30 @@ namespace PharmacyWebApp.Controllers
         {
             _pharmacyDB = pharmacyDB;
         }
-        //[HttpPost("/ProductPage")]
-        public IActionResult ProductPage()
+        [Route("Product/ProductPage")]
+        public IActionResult ProductPage([FromServices] IProductHelper productHelper)
         {
-            return View("ProductPage", _pharmacyDB.Products.ToList());
+            return View("ProductPage", productHelper.GetAll(0));
         }
-        //[HttpPost("/GetProducts")]
-        public IActionResult GetProducts()
+        [HttpPost("Product/GetProducts")]
+        public IActionResult GetProducts([FromServices] IProductHelper productHelper)
         {
-            return Json(_pharmacyDB.Products.ToList());
+            return Json(productHelper.GetAll(0));
         }
-        //[HttpPost("/AddProduct")]
-        public IActionResult AddProduct([FromBody] Product product, [FromServices] IPartyHelper partyHelper)
+        [HttpPost("Product/AddProduct")]
+        public IActionResult AddProduct([FromBody] Product product, [FromServices] IProductHelper productHelper)
         {
-            IProductHelper productHelper = new ProductHelper(_pharmacyDB, partyHelper);
             Product newproduct = productHelper.Add(product);
-            return new JsonResult(newproduct);
+            return Json(newproduct);
         }
-        //[HttpPost("/RemoveProduct/{id}")]
-        public IActionResult RemoveProduct([FromRoute] string id, [FromServices] IPartyHelper partyHelper)
+        [HttpPost("Product/RemoveProduct/{id}")]
+        public IActionResult RemoveProduct([FromRoute] string id, [FromServices] IProductHelper productHelper)
         {
             int idProduct;
             if (!int.TryParse(id, out idProduct))
             {
                 return BadRequest("Введен некорректный id");
             }
-            IProductHelper productHelper = new ProductHelper(_pharmacyDB, partyHelper);
             productHelper.Remove(idProduct);
             return Ok();
         }

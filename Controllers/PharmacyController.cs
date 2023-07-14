@@ -16,30 +16,30 @@ namespace PharmacyWebApp.Controllers
         {
             _pharmacyDB = pharmacyDB;
         }
-        //[HttpGet("PharmacyPage")]
-        public IActionResult PharmacyPage()
+        [Route("")]
+        [Route("Pharmacy/PharmacyPage")]
+        public IActionResult PharmacyPage([FromServices] IPharmacyHelper pharmacyHelper)
         {
-            var pharm = _pharmacyDB.Pharmacies.ToList();
-            return View("PharmacyPage", _pharmacyDB.Pharmacies.ToList());
+            return View("PharmacyPage", pharmacyHelper.GetAll(0));
         }
 
         //[HttpGet("/ProductsForPharmacyPage/{id}")]
-        public IActionResult ProductsForPharmacyPage([FromRoute] string id)
-        {
-            int idPharmacy;
-            if (!int.TryParse(id, out idPharmacy))
-            {
-                return BadRequest("Введен некорректный id");
-            }
-            Pharmacy pharmacy = _pharmacyDB.Pharmacies.Find(idPharmacy);
-            if (pharmacy == null)
-            {
-                return NotFound("Аптека не найдена, поэтому не могу вывести её товары");
-            }
-            return View("ProductsForPharmacyPage", _pharmacyDB.Pharmacies.Find(idPharmacy));
-        }
-        //[HttpPost("/RemovePharmacy/{id}")]
-        public IActionResult RemovePharmacy([FromRoute] string id, [FromServices] IWarehouseHelper warehouseHelper)
+        //public IActionResult ProductsForPharmacyPage([FromRoute] string id)
+        //{
+        //    int idPharmacy;
+        //    if (!int.TryParse(id, out idPharmacy))
+        //    {
+        //        return BadRequest("Введен некорректный id");
+        //    }
+        //    Pharmacy pharmacy = _pharmacyDB.Pharmacies.Find(idPharmacy);
+        //    if (pharmacy == null)
+        //    {
+        //        return NotFound("Аптека не найдена, поэтому не могу вывести её товары");
+        //    }
+        //    return View("ProductsForPharmacyPage", _pharmacyDB.Pharmacies.Find(idPharmacy));
+        //}
+        [HttpPost("Pharmacy/RemovePharmacy/{id}")]
+        public IActionResult RemovePharmacy([FromRoute] string id, [FromServices] IPharmacyHelper pharmacyHelper)
         {
             int idPharmacy;
             if (!int.TryParse(id, out idPharmacy))
@@ -47,15 +47,13 @@ namespace PharmacyWebApp.Controllers
                 return BadRequest("Введен некорректный id");
             }
 
-            IPharmacyHelper pharmacyHelper = new PharmacyHelper(_pharmacyDB, warehouseHelper);
             pharmacyHelper.Remove(idPharmacy);
             return Ok();
         }
-        //[HttpPost("/AddPharmacy")]
-        public IActionResult AddPharmacy([FromBody] Pharmacy pharmacy, [FromServices] IWarehouseHelper warehouseHelper)
+        [HttpPost("Pharmacy/AddPharmacy")]
+        public IActionResult AddPharmacy([FromBody] Pharmacy pharmacy, [FromServices] IPharmacyHelper pharmacyHelper)
         {
-            IPharmacyHelper IpharmacyHelper = new PharmacyHelper(_pharmacyDB, warehouseHelper);
-            Pharmacy newpharmacy = IpharmacyHelper.Add(pharmacy);
+            Pharmacy newpharmacy = pharmacyHelper.Add(pharmacy);
             return Json(newpharmacy);
         }
 

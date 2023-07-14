@@ -8,10 +8,9 @@ namespace PharmacyWebApp.Models.Tables
     [Table("Warehouse")]
     public class Warehouse:BaseModel
     {
-
         public virtual Pharmacy Pharmacy { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Party> Parties { get; set; }
+        public virtual ICollection<Party>? Parties { get; set; }
 
         //[NotMapped]
         //[JsonIgnore]

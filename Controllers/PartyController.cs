@@ -15,7 +15,7 @@ namespace PharmacyWebApp.Controllers
         {
             _pharmacyDB = pharmacyDB;
         }
-        //[HttpPost("/PartyPAge/{id}")]
+        [Route("Party/PartyPage/{id}")]
         public IActionResult PartyPage([FromRoute] string id)
         {
             int idWarehouse;
@@ -24,28 +24,28 @@ namespace PharmacyWebApp.Controllers
                 return BadRequest("Введен некорректный id");
             }
             Warehouse warehouse = _pharmacyDB.Warehouses.Find(idWarehouse);
+            var parties = warehouse.Parties;
             if (warehouse == null)
             {
                 return NotFound("Склад не найден");
             }
             return View("PartyPage", warehouse);
         }
-        //[HttpPost("/AddParty")]
-        public IActionResult AddParty([FromBody] Party party)
+        [HttpPost("Party/AddParty")]
+        public IActionResult AddParty([FromBody] Party party, [FromServices] IPartyHelper partyHelper)
         {
-            IPartyHelper partyHelper = new PartyHelper(_pharmacyDB);
             Party newparty = partyHelper.Add(party);
             return Json(newparty);
         }
-        //[HttpPost("/RemoveParty/{id}")]
-        public IActionResult RemoveParty([FromRoute] string id)
+
+        [HttpPost("Party/RemoveParty/{id}")]
+        public IActionResult RemoveParty([FromRoute] string id, [FromServices] IPartyHelper partyHelper)
         {
             int idParty;
             if (!int.TryParse(id, out idParty))
             {
                 return BadRequest("Введен некорректный id");
             }
-            IPartyHelper partyHelper = new PartyHelper(_pharmacyDB);
             partyHelper.Remove(idParty);
             return Ok();
         }

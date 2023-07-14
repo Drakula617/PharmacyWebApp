@@ -15,7 +15,7 @@ namespace PharmacyWebApp.Models.Tables
         /// <summary>
         /// Название
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
         
     }
 }

@@ -2,9 +2,11 @@
 using PharmacyWebApp.Interfaces;
 using PharmacyWebApp.Models.Tables;
 using System.Diagnostics;
+using System.Web.Http;
 
 namespace PharmacyWebApp.Models.HelperClasses
 {
+    
     public class PharmacyHelper : IPharmacyHelper
     {
         readonly PharmacyDB _pharmacyDB;
