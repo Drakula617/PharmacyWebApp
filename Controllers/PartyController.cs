@@ -4,26 +4,40 @@ using PharmacyWebApp.Models;
 using PharmacyWebApp.Models.HelperClasses;
 using PharmacyWebApp.Models.Tables;
 
-namespace PharmacyWebApp.Controllers.api
+namespace PharmacyWebApp.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class PartyController : ControllerBase
+    //[NonController]
+    //[Route("[controller]")]
+    public class PartyController : Controller
     {
         readonly PharmacyDB _pharmacyDB;
         public PartyController(PharmacyDB pharmacyDB)
         {
             _pharmacyDB = pharmacyDB;
         }
-
-        [HttpPost("/AddParty")]
+        //[HttpPost("/PartyPAge/{id}")]
+        public IActionResult PartyPage([FromRoute] string id)
+        {
+            int idWarehouse;
+            if (!int.TryParse(id, out idWarehouse))
+            {
+                return BadRequest("Введен некорректный id");
+            }
+            Warehouse warehouse = _pharmacyDB.Warehouses.Find(idWarehouse);
+            if (warehouse == null)
+            {
+                return NotFound("Склад не найден");
+            }
+            return View("PartyPage", warehouse);
+        }
+        //[HttpPost("/AddParty")]
         public IActionResult AddParty([FromBody] Party party)
         {
             IPartyHelper partyHelper = new PartyHelper(_pharmacyDB);
             Party newparty = partyHelper.Add(party);
-            return new JsonResult(newparty);
+            return Json(newparty);
         }
-        [HttpPost("/RemoveParty/{id}")]
+        //[HttpPost("/RemoveParty/{id}")]
         public IActionResult RemoveParty([FromRoute] string id)
         {
             int idParty;

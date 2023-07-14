@@ -35,10 +35,10 @@
                     <td>{{pharmacy.city }} {{pharmacy.street}}</td>
                     <td>+{{pharmacy.phone}}</td>
                     <td>
-                        <a :href="'api/Warehouse/WarehousePage/'+pharmacy.id">Склады</a>
+                        <a :href="'/Warehouse/WarehousePage/'+pharmacy.id">Склады</a>
                     </td>
                     <td>
-                        <a :href="'view/Pharmacy/ProductsForPharmacyPage/'+pharmacy.id">Товары</a>
+                        <a :href="'/Pharmacy/ProductsForPharmacyPage/'+pharmacy.id">Товары</a>
                     </td>
                     <td>
                         <a v-on:click="removePharmacy(pharmacy)" href="#">Удалить</a>
@@ -63,14 +63,14 @@
             methods:
             {
                 addPharmacy: function () {
-                    axios.post('api/Pharmacy/AddPharmacy', this.newpharmacy).
+                    axios.post('/Pharmacy/AddPharmacy', this.newpharmacy).
                         then((response) => {
                             this.pharmacies.push(response.data);
                         });
                 },
                 removePharmacy: function (pharmacy) {
                     
-                    axios.post('api/Pharmacy/RemovePharmacy/' + pharmacy.id).
+                    axios.post('/Pharmacy/RemovePharmacy/' + pharmacy.id).
                         then((response) => {
 
                             this.pharmacies = this.pharmacies.filter(pharmacyitem => pharmacyitem.id != pharmacy.id);

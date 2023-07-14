@@ -9,7 +9,7 @@
 <body>
     <div id="div-warehouses">
         <form onsubmit="return false;" v-on:submit="addWarehouse">
-            <a class="link-back" href="view/Pharmacy/PharmacyPage">Назад</a>
+            <a class="link-back" href="/Pharmacy/PharmacyPage">Назад</a>
             <input class="input-field" type="text" v-model="newwarehouse.Name" required />
             <input type="submit" value="Добавить" class="btn-add" />
         </form>
@@ -30,7 +30,7 @@
                     <td>
                         {{warehouse.pharmacy.name}}</td>
                     <td>
-                        <a :href="'view/Party/PartyPage/'+warehouse.id">Партии</a>
+                        <a :href="'/Party/PartyPage/'+warehouse.id">Партии</a>
                     </td>
                     <td>
                         <a v-on:click="removeWarehouse(warehouse.id)" href="#">Удалить</a>
@@ -53,14 +53,14 @@
 
                 addWarehouse: function()
                 {
-                    axios.post('api/Warehouse/AddWarehouse', this.newwarehouse)
+                    axios.post('/Warehouse/AddWarehouse', this.newwarehouse)
                     .then((response)=> {
                          this.warehouses.push(response.data);
                     });
                 },
                 removeWarehouse: function(id)
                 {
-                    axios.post('api/Warehouse/RemoveWarehouse/'+ id).
+                    axios.post('/Warehouse/RemoveWarehouse/'+ id).
                         then((response)=> {
                             this.warehouses = this.warehouses.filter(warehouse=> warehouse.id != id);
                         });

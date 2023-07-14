@@ -4,31 +4,35 @@ using PharmacyWebApp.Models;
 using PharmacyWebApp.Models.HelperClasses;
 using PharmacyWebApp.Models.Tables;
 
-namespace PharmacyWebApp.Controllers.api
+namespace PharmacyWebApp.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    //[NonController]
+    //[Route("[controller]")]
+    public class ProductController : Controller
     {
         readonly PharmacyDB _pharmacyDB;
         public ProductController(PharmacyDB pharmacyDB)
         {
             _pharmacyDB = pharmacyDB;
         }
-
-        [HttpPost("/GetProducts")]
+        //[HttpPost("/ProductPage")]
+        public IActionResult ProductPage()
+        {
+            return View("ProductPage", _pharmacyDB.Products.ToList());
+        }
+        //[HttpPost("/GetProducts")]
         public IActionResult GetProducts()
         {
-            return new JsonResult(_pharmacyDB.Products.ToList());
+            return Json(_pharmacyDB.Products.ToList());
         }
-        [HttpPost("/AddProduct")]
+        //[HttpPost("/AddProduct")]
         public IActionResult AddProduct([FromBody] Product product, [FromServices] IPartyHelper partyHelper)
         {
             IProductHelper productHelper = new ProductHelper(_pharmacyDB, partyHelper);
             Product newproduct = productHelper.Add(product);
             return new JsonResult(newproduct);
         }
-        [HttpPost("/RemoveProduct/{id}")]
+        //[HttpPost("/RemoveProduct/{id}")]
         public IActionResult RemoveProduct([FromRoute] string id, [FromServices] IPartyHelper partyHelper)
         {
             int idProduct;
@@ -36,10 +40,10 @@ namespace PharmacyWebApp.Controllers.api
             {
                 return BadRequest("Введен некорректный id");
             }
-            IProductHelper productHelper =  new ProductHelper(_pharmacyDB, partyHelper);
+            IProductHelper productHelper = new ProductHelper(_pharmacyDB, partyHelper);
             productHelper.Remove(idProduct);
             return Ok();
         }
-        
+
     }
 }

@@ -43,7 +43,7 @@
                 },
                 products:[],
                 url:{
-                    products: 'api/Product/GetProducts/'
+                    products: '/Product/GetProducts/'
                 }
             },
             mounted()
@@ -60,7 +60,7 @@
                 },
                 removeProduct: function(id)
                 {
-                    axios.post('api/Product/RemoveProduct/' + id)
+                    axios.post('/Product/RemoveProduct/' + id)
                     .then((response)=>{
                             
                         this.products = this.products.filter(c=> c.id != id);
@@ -69,7 +69,7 @@
                 addProduct: function()
                 {
                     console.log(this.newproduct);
-                    axios.post('api/Product/AddProduct', this.newproduct).
+                    axios.post('/Product/AddProduct', this.newproduct).
                     then((response) => 
                     {
                         this.products.push(response.data);

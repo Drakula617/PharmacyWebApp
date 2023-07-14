@@ -17,19 +17,19 @@ namespace PharmacyWebApp.Models.Tables
         [JsonIgnore]
         public virtual ICollection<Warehouse> Warehouses { get; set; }
 
-        [NotMapped]
-        public List<ProductsInPharmacy> ProductsInPharmacies
-        {
-            get
-            {
-                if (Warehouses != null)
-                    return Warehouses.SelectMany(c => c.ProductsInWarehouses)
-                    .GroupBy(c => c.Product)
-                    .Select(cc => new ProductsInPharmacy()
-                    { Product = cc.Key, CountProducts = cc.Sum(ccc => ccc.CountProducts) }).ToList();
-                else
-                    return new List<ProductsInPharmacy>();
-            }
-        }
+        //[NotMapped]
+        //public List<ProductsInPharmacy> ProductsInPharmacies
+        //{
+        //    get
+        //    {
+        //        if (Warehouses != null)
+        //            return Warehouses.SelectMany(c => c.ProductsInWarehouses)
+        //            .GroupBy(c => c.Product)
+        //            .Select(cc => new ProductsInPharmacy()
+        //            { Product = cc.Key, CountProducts = cc.Sum(ccc => ccc.CountProducts) }).ToList();
+        //        else
+        //            return new List<ProductsInPharmacy>();
+        //    }
+        //}
     }
 }

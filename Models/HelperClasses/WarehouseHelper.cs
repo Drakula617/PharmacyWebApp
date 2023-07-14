@@ -15,9 +15,10 @@ namespace PharmacyWebApp.Models.HelperClasses
         }
         public Warehouse Add(Warehouse obj)
         {
-            Warehouse newarehouse = _pharmacyDB.Warehouses.Add(obj).Entity;
+            obj.Pharmacy = _pharmacyDB.Pharmacies.Find(obj.Pharmacy.Id);
+            var addwarehouse = _pharmacyDB.Warehouses.Add(obj);
             _pharmacyDB.SaveChanges();
-            return newarehouse;
+            return addwarehouse.Entity;
         }
         public IEnumerable<Warehouse> GetAll(int id)
         {
