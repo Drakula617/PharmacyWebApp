@@ -20,8 +20,8 @@ namespace PharmacyWebApp.Controllers.api
         public IActionResult AddParty([FromBody] Party party)
         {
             IPartyHelper partyHelper = new PartyHelper(_pharmacyDB);
-            partyHelper.Add(party);
-            return new JsonResult();
+            Party newparty = partyHelper.Add(party);
+            return new JsonResult(newparty);
         }
         [HttpPost("/RemoveParty/{id}")]
         public IActionResult RemoveParty([FromRoute] string id)
@@ -31,13 +31,8 @@ namespace PharmacyWebApp.Controllers.api
             {
                 return BadRequest("Введен некорректный id");
             }
-            Party party = _pharmacyDB.Parties.Find(idParty);
-            if (party == null)
-            {
-                return NotFound("Партия не найдена, поэтому не могу её удалить");
-            }
-            IPartyHelper partyHelper = new PartyHelper(_pharmacyDB, party);
-            partyHelper.Remove();
+            IPartyHelper partyHelper = new PartyHelper(_pharmacyDB);
+            partyHelper.Remove(idParty);
             return Ok();
         }
 

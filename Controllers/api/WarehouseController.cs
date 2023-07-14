@@ -17,28 +17,23 @@ namespace PharmacyWebApp.Controllers.api
         }
 
         [HttpPost("/RemoveWarehouse/{id}")]
-        public IActionResult RemoveWarehouse([FromRoute] string id)
+        public IActionResult RemoveWarehouse([FromRoute] string id, [FromServices] IPartyHelper partyHelper)
         {
             int idWarehouse;
             if (!int.TryParse(id, out idWarehouse))
             {
                 return BadRequest("Введен некорректный id");
             }
-            Warehouse warehouse = _pharmacyDB.Warehouses.Find(idWarehouse);
-            if (warehouse == null)
-            {
-                return NotFound("Склад не найден");
-            }
-            IWarehouseHelper warehouseHelper = new WarehouseHelper(_pharmacyDB, warehouse);
-            warehouseHelper.Remove();
+            IWarehouseHelper warehouseHelper = new WarehouseHelper(_pharmacyDB, partyHelper);
+            warehouseHelper.Remove(idWarehouse);
             return Ok();
         }
         [HttpPost("/AddWarehouse")]
-        public IActionResult AddWarehouse([FromBody] Warehouse warehouse) 
+        public IActionResult AddWarehouse([FromBody] Warehouse warehouse, [FromServices] IPartyHelper partyHelper) 
         {
-            IWarehouseHelper warehouseHelper = new WarehouseHelper(_pharmacyDB, warehouse);
-            warehouseHelper.Add(out warehouse);
-            return new JsonResult(warehouse);
+            IWarehouseHelper warehouseHelper = new WarehouseHelper(_pharmacyDB, partyHelper);
+            Warehouse newwarehouse = warehouseHelper.Add(warehouse);
+            return new JsonResult(newwarehouse);
         }
     }
 }

@@ -15,10 +15,11 @@ namespace PharmacyWebApp.Models.HelperClasses
             _partyHelper = partyHelper;
         }
 
-        public void Add(Product obj)
+        public Product Add(Product obj)
         {
-            _pharmacyDB.Products.Add(obj);
+            Product newporoduct = _pharmacyDB.Products.Add(obj).Entity;
             _pharmacyDB.SaveChanges();
+            return newporoduct;
         }
 
         public IEnumerable<Product> GetAll(int id)

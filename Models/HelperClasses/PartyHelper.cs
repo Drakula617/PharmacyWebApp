@@ -12,10 +12,11 @@ namespace PharmacyWebApp.Models.HelperClasses
         {
             _pharmacyDB = pharmacyDB;
         }
-        public void Add(Party obj)
+        public Party Add(Party obj)
         {
-            _pharmacyDB.Parties.Add(obj);
+            Party newparty = _pharmacyDB.Parties.Add(obj).Entity;
             _pharmacyDB.SaveChanges();
+            return newparty;
         }
 
         public IEnumerable<Party> GetAll(int id)

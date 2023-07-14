@@ -6,7 +6,7 @@
         /// Добавление
         /// </summary>
         /// <param name=""></param>
-        void Add(T obj);
+        T Add(T obj);
 
         IEnumerable<T> GetAll(int id);
         /// <summary>

@@ -22,27 +22,22 @@ namespace PharmacyWebApp.Controllers.api
             return new JsonResult(_pharmacyDB.Products.ToList());
         }
         [HttpPost("/AddProduct")]
-        public IActionResult AddProduct([FromBody] Product product)
+        public IActionResult AddProduct([FromBody] Product product, [FromServices] IPartyHelper partyHelper)
         {
-            IProductHelper productHelper = new ProductHelper(_pharmacyDB, product);
-            productHelper.Add(out product);
-            return new JsonResult(product);
+            IProductHelper productHelper = new ProductHelper(_pharmacyDB, partyHelper);
+            Product newproduct = productHelper.Add(product);
+            return new JsonResult(newproduct);
         }
         [HttpPost("/RemoveProduct/{id}")]
-        public IActionResult RemoveProduct([FromRoute] string id)
+        public IActionResult RemoveProduct([FromRoute] string id, [FromServices] IPartyHelper partyHelper)
         {
             int idProduct;
             if (!int.TryParse(id, out idProduct))
             {
                 return BadRequest("Введен некорректный id");
             }
-            Product product = _pharmacyDB.Products.Find(idProduct);
-            if (product == null)
-            {
-                return NotFound("Товар не найден");
-            }
-            IProductHelper productHelper =  new ProductHelper(_pharmacyDB, product);
-            productHelper.Remove();
+            IProductHelper productHelper =  new ProductHelper(_pharmacyDB, partyHelper);
+            productHelper.Remove(idProduct);
             return Ok();
         }
         
